@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body_block %}
+<div style="display: flex; justify-content: center; font-family: Poppins;">
+	<div class="card" style="background: linear-gradient(to Right top, #52fffd,#00ff9a); width: 30rem; height: 25rem; margin-top: 50px; ">
+		<h1 class="text-center" style="font-size: 35px;"> Welcome To HRMS </h1>
+		<h3 class="text-center" style="font-size: 25px; margin-top: 20px ;"> Create Your Account </h3>
+		<div class="input-group input-group-sm mb-3" style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+			<form method="POST">
+					{% csrf_token %}
+				<input type='text' name='username' placeholder='Username' class="form-control" style="border: none;" required/>
+				<br/>
+
+				<input type='password' name='password' placeholder='Password' class="form-control" style="border: none;" required/>
+				<br/>
+
+				<input type='password' name='password2' placeholder='Confirm Password' class="form-control" style="border: none;" required/>
+				<br/>
+
+				{% if error_message %}
+					<p class="text-danger">{{ error_message }}</p>
+				{% endif %}
+					
+				<input type="submit" value="Save" class="btn btn-light btn-block">
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock body_block %}

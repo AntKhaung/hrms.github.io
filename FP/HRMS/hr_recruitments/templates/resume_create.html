@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block head_block %} {% endblock %}
+{% block body_block %}
+<div class="container" style="font-family: Poppins;">
+    <br/><br/>
+    <h1 class="float-right" style="font-weight: bold;"> Create Resume </h1>
+
+    <form method="POST" action="{% url 'resume_create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <a href="javascript:history.back()" class="btn btn-light"> <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                Back 
+            </a>
+            <input type="submit" value="Save" class="btn btn-outline-dark">
+        </div><br/>
+        {{ form.as_p }}
+    </form>
+</div>
+{% endblock %}

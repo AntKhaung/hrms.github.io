@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block head_block %} {% endblock %}
+{% block body_block %}
+<div class="container" style="font-family: Poppins;">
+    <div>
+        <h1 class="float-right" style="font-weight: bold;"> Resume Details </h1>
+
+        <form class="mt-5" method="POST" action="/hr_recruitments/new_resume/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <a class="btn btn-dark" href="/hr_recruitments/show_resume"><i class="fa fa-arrow-left" 
+                    aria-hidden="true"></i> 
+                    Back
+                </a>
+
+                <a class="btn btn-outline-dark" href="/hr_recruitments/update/{{resume.id}}/"> Update </a>
+
+                <a class="btn btn-outline-dark" href="/hr_recruitments/delete/{{resume.id}}/"
+                    onclick="return confirm('Are you sure?');"> Delete </a>
+            </div>
+        </form>
+    </div>
+    <br/>
+
+    <fieldset disabled="disabled">
+        <div class="list-group list-group-flush">
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Name </label>
+                    <div class="col-md-8">
+                        {{resume.name}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Sequence </label>
+                    <div class="col-md-8">
+                        {{resume.sequence}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Note </label>
+                    <div class="col-md-8">
+                        {{resume.note}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Status </label>
+                    <div class="col-md-8">
+                        {{resume.status}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Create Date </label>
+                    <div class="col-md-8">
+                        {{resume.create_date}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Appointment Date </label>
+                    <div class="col-md-8">
+                        {{resume.appointment_date}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Employee </label>
+                    <div class="col-md-8">
+                        <input type='text' name='employee' value='{{resume.employee}}' class="form-control" readonly/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-4 font-weight-bold"> Tags </label>
+                    <div class="col-md-8">
+                        {% for tag in resume.tags.all %}
+                            <a href="#" class="badge badge-pill badge-info"> {{tag}} </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <div class="form-control">
+                        <label class=" font-weight-bold" style="margin-right: 10px;"> Active </label>
+                            {{resume.is_active}}
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="form-control">
+                        <label class="font-weight-bold" style="margin-right: 10px;"> Attachment </label>
+                            {{resume.attachment}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                
+            </div>
+        </div>
+    </fieldset>
+</div>
+{% endblock %}

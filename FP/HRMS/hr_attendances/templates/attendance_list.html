@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} Attendances {% endblock %}
+{% block body_block %}
+{% load static %}
+<div class="container" style="font-family: Poppins;"></br>
+	<div>
+		<h2  style="text-align: center; font-weight: 600;"> Attendances </h2>
+	</div><br/>
+
+	<div class="float-right">
+		<form class="form-inline" action="/hr_attendances/search_by/">
+			<input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+
+			<button class="btn btn-outline-dark btn-lg" type="submit"> 
+				<i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
+	</div>
+
+	<div class="btn-group btn-group-toggle">
+		<form class="btn btn-secondary active" action="/hr_attendances/order_by/" style="background-color: #52fffd;">
+			<a class="btn btn-outline-dark" href="/hr_attendances/new_attendance/"> 
+				<i class="fa fa-plus" aria-hidden="true"></i> Create
+			</a>
+
+			<p style="background-color: white; color: black; padding: 10px 10px; margin-top:5px; border-radius: 5px; cursor: auto; font-weight: bold;" >
+				Time is Precious...
+			</p>
+		</form>
+	</div><br/><br/>
+
+	<table class="table-bordered table-info table table-hover" style="cursor: pointer;">
+		<thead class="thead" style="background-color: #52fffd;">
+			<tr>
+				<!-- <th scope="col">Options</th> -->
+				<th scope="col">No.</th>
+				<th scope="col">Name</th>
+				<th scope="col">Check In</th>
+				<th scope="col">Check Out </th>
+				<th scope="col">Date </th>
+				<th scope="col">Description </th>
+			</tr>
+		</thead>
+		<tbody style="background: linear-gradient(to Right top, #52fffd,#00ff9a);">
+			{% for attendance in all_attendances %}
+				<tr class="clickable" onclick="window.location='/hr_attendances/detail/{{attendance.id}}/'">
+					<td>{{ forloop.counter }}</td>
+					<td>{{ attendance.name }}</td>
+					<td>{{ attendance.check_in }}</td>
+					<td>{{ attendance.check_out }}</td>
+					<td>{{ attendance.date }}</td>
+					<td>{{ attendance.description }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock body_block %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %} Employees {% endblock %}
+{% block body_block %}
+{% load static %}
+<div class="container" style="font-family: Poppins;"></br>
+	<div>
+		<h2 style="text-align: center; font-weight: 600;">Employees</h2>
+	</div></br>
+
+	<div class="float-right">
+		<form class="form-inline" action="/hr_employees/search_by/">
+			<input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+
+			<button class="btn btn-dark btn-lg" type="submit"> 
+				<i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
+	</div>
+
+	<div class="btn-group btn-group-toggle">
+		<form class="btn btn-secondary active" action="/hr_employees/order_by/"  style="background-color: #52fffd;">
+			<a class="btn btn-outline-dark" href="/hr_employees/new_employee/"> 
+				<i class="fa fa-plus" aria-hidden="true"></i> Create
+			</a>
+
+			<button class="btn btn-light {{ order_selected.name }}"
+				type="submit" name="order" value="name">Name <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.age }}" 
+				type="submit" name="order" value="age">Age <i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.address }}" 
+				type="submit" name="order" value="address">Address <i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
+			</button>
+		</form>
+	</div></br></br>
+
+	<table class="table-bordered table-info table table-hover" style="cursor: pointer;">
+		<thead class="thead" style="background-color: #52fffd;">
+			<tr>
+				<!-- <th scope="col">Options</th> -->
+				<th scope="col">No.</th>
+				<th scope="col">Name</th>
+				<th scope="col">Age</th>
+				<th scope="col">Birthday</th>
+				<th scope="col">Address</th>
+				<th scope="col">Email</th>
+				<th scope="col">Gender</th>
+				<th scope="col">Is Married</th>
+				<th scope="col">Joining Date</th>
+			</tr>
+		</thead>
+		<tbody style="background: linear-gradient(to Right top, #52fffd,#00ff9a);">
+			{% for employee in all_employees %}
+				<tr class="clickable" onclick="window.location='/hr_employees/detail/{{employee.id}}/'">
+					<td>{{ forloop.counter }}</td>
+					<td>{{ employee.name }}</td>
+					<td>{{ employee.age }}</td>
+					<td>{{ employee.birthday }}</td>
+					<td>{{ employee.address }}</td>
+					<td>{{ employee.email }}</td>
+					<td>{{ employee.gender }}</td>
+					<td>{{ employee.is_married }}</td>
+					<td>{{ employee.joining_date }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock body_block %}

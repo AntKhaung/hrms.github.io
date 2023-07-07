@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} Expenses {% endblock %}
+{% block body_block %}
+{% load static %}
+<div class="container" style="font-family: Poppins;"></br>
+	<div>
+		<h2  style="text-align: center; font-weight: 600;"> Expenses </h2>
+	</div><br/>
+
+	<div class="float-right">
+		<form class="form-inline" action="/hr_expenses/search_by/">
+			<input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+
+			<button class="btn btn-dark btn-lg" type="submit"> 
+				<i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
+	</div>
+
+	<div class="btn-group btn-group-toggle">
+		<form class="btn btn-secondary active" action="/hr_expenses/order_by/" style="background-color: #52fffd;">
+			<a class="btn btn-outline-dark" href="/hr_expenses/new_expense/"> 
+				<i class="fa fa-plus" aria-hidden="true"></i> Create
+			</a>
+
+			<button class="btn btn-light {{ order_selected.name }}" 
+				type="submit" name="order" value="description">Description <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.rank }}" 
+				type="submit" name="order" value="expense_date"> Expense Date <i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.note }}" 
+				type="submit" name="order" value="total_ammount">Total Ammount <i class="fas fa-sort-numeric-down" aria-hidden="true"></i>
+			</button>
+		</form>
+	</div><br/><br/>
+
+	<table class="table-bordered table-info table table-hover" style="cursor: pointer;">
+		<thead class="thead" style="background-color: #52fffd;">
+			<tr>
+				<!-- <th scope="col">Options</th> -->
+				<th scope="col">No.</th>
+				<th scope="col">Description</th>
+				<th scope="col">Product</th>
+				<th scope="col">Expense Date</th>
+				<th scope="col">Note</th>
+				<th scope="col">Total Ammount</th>
+				<th scope="col">Paid By</th>
+			</tr>
+		</thead>
+		<tbody style="background: linear-gradient(to Right top, #52fffd,#00ff9a);">
+			{% for expense in all_expenses %}
+				<tr class="clickable" onclick="window.location='/hr_expenses/detail/{{expense.id}}/'">
+					<td>{{ forloop.counter }}</td>
+					<td>{{ expense.description }}</td>
+					<td>{{ expense.product }}</td>
+					<td>{{ expense.expense_date }}</td>
+					<td>{{ expense.note }}</td>
+					<td>{{ expense.total_ammount }}</td>
+					<td>{{ expense.paid_by }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock body_block %}

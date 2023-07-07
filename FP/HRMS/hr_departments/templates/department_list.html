@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %} Departments {% endblock %}
+{% block body_block %}
+{% load static %}
+<div class="container" style="font-family: Poppins;"><br/>
+    <div>
+        <h2 style="text-align: center; font-weight: 600;"> Departments </h2>
+    </div>
+
+    <div class="float-right">
+        <form class="form-inline" action="/hr_departments/search_by/">
+            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+
+            <button class="btn btn-dark btn-lg" type="submit"> 
+                <i class="fas fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+
+    <div class="btn-group btn-group-toggle">
+        <form class="btn btn-secondary active" action="/hr_departments/order_by/" style="background-color: #52fffd;">
+            <a class="btn btn-outline-dark" href="/hr_departments/new_department/"> 
+                <i class="fa fa-plus" aria-hidden="true"></i> Create
+            </a>
+
+            <button class="btn btn-light {{ order_selected.name }}" 
+                type="submit" name="order" value="name">Name <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+            </button>
+
+            <button class="btn btn-light {{ order_selected.sequence }}" 
+                type="submit" name="order" value="sequence">Sequence <i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+            </button>
+
+            <button class="btn btn-light {{ order_selected.note }}" 
+                type="submit" name="order" value="note">Note <i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
+            </button>
+        </form>
+    </div><br/><br/>
+
+    <table class="table-bordered table-info table table-hover" style="cursor: pointer;">
+        <thead class="thead" style="background-color: #52fffd;">
+            <tr>
+                <!-- <th scope="col">Options</th> -->
+                <th scope="col">No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Sequence</th>
+                <th scope="col">Meeting Date</th>
+                <th scope="col">Total Empoyees</th>
+                <th scope="col">Note</th>
+                <th scope="col">Status</th>
+                <th scope="col">Is Active</th>
+                <th scope="col">Create Date</th>
+            </tr>
+        </thead>
+        <tbody style="background: linear-gradient(to Right top, #52fffd,#00ff9a);">
+            {% for department in all_departments %}
+            <tr class="clickable" onclick="window.location='/hr_departments/detail/{{department.id}}/'">
+                <td>{{ forloop.counter }}</td>
+                <td>{{ department.name }}</td>
+                <td>{{ department.sequence }}</td>
+                <td>{{ department.meeting_date }}</td>
+                <td>{{ department.total_employees }}</td>
+                <td>{{ department.note }}</td>
+                <td>{{ department.status }}</td>
+                <td>{{ department.is_active }}</td>
+                <td>{{ department.create_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock body_block %}

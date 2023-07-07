@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %} Jobs {% endblock %}
+{% block body_block %}
+{% load static %}
+<div class="container" style="font-family: Poppins;"><br/>
+	<div>
+		<h2 style="text-align: center; font-weight: 600;"> Jobs </h2>
+	</div>
+
+	<div class="float-right">
+		<form class="form-inline" action="/hr_jobs/search_by/">
+			<input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+
+			<button class="btn btn-dark btn-lg" type="submit"> 
+				<i class="fas fa-search" aria-hidden="true"></i></button>
+		</form>
+	</div>
+
+	<div class="btn-group btn-group-toggle">
+		<form class="btn btn-secondary active" action="/hr_jobs/order_by/" style="background-color: #52fffd;">
+			<a class="btn btn-outline-dark" href="/hr_jobs/new_job/"> 
+				<i class="fa fa-plus" aria-hidden="true"></i> Create
+			</a>
+
+			<button class="btn btn-light {{ order_selected.name }}" 
+				type="submit" name="order" value="name">Name <i class="fas fa-sort-alpha-down" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.sequence }}" 
+				type="submit" name="order" value="sequence">Sequence <i class="fas fa-sort-numeric-up" aria-hidden="true"></i>
+			</button>
+
+			<button class="btn btn-light {{ order_selected.note }}" 
+				type="submit" name="order" value="note">Note <i class="fas fa-sort-alpha-up" aria-hidden="true"></i>
+			</button>
+		</form>
+	</div><br/><br/>
+
+	<table class="table-bordered table-info table table-hover" style="cursor: pointer;">
+		<thead class="thead" style="background-color: #52fffd;">
+			<tr>
+				<!-- <th scope="col">Options</th> -->
+				<th scope="col">No.</th>
+				<th scope="col">Name</th>
+				<th scope="col">Sequencce</th>
+				<th scope="col">Open Date</th>
+				<th scope="col">Expected Salary</th>
+				<th scope="col">Note</th>
+				<th scope="col">Status</th>
+				<th scope="col">Is Active</th>
+				<th scope="col">Create Date</th>
+			</tr>
+		</thead>
+		<tbody style="background: linear-gradient(to Right top, #52fffd,#00ff9a);">
+			{% for job in all_jobs %}
+				<tr class="clickable" onclick="window.location='/hr_jobs/detail/{{job.id}}/'">
+					<td>{{ forloop.counter }}</td>
+					<td>{{ job.name }}</td>
+					<td>{{ job.sequence }}</td>
+					<td>{{ job.open_date }}</td>
+					<td>{{ job.expected_salary }}</td>
+					<td>{{ job.note }}</td>
+					<td>{{ job.status }}</td>
+					<td>{{ job.is_active }}</td>
+					<td>{{ job.create_date }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+{% endblock body_block %}

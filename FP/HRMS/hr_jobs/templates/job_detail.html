@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block head_block %} {% endblock %}
+{% block body_block %}
+<div class="container" style="font-family: Poppins;">
+    <div>
+        <h1 class="float-right" style="font-weight: bold;"> Job Details </h1>
+    
+    <form class="mt-5" method="POST" action="/hr_jobs/new_job/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <a class="btn btn-dark" href="/hr_jobs/show_job">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                Back
+            </a>
+            
+            <a class="btn btn-outline-dark" href="/hr_jobs/update/{{form.instance.id}}/"> Update </a>
+            
+            <a class="btn btn-outline-dark" href="/hr_jobs/delete/{{form.instance.id}}/"
+                onclick="return confirm('Are you sure?');"> Delete </a>
+        </div>
+        <br/>
+
+        <fieldset disabled="disabled">
+            <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                    <div class="form-row">
+                        <label class="col-md-3 font-weight-bold"> Name </label>
+                        <div class="col-md-9">
+                            {{form.name}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item">
+                    <div class="form-row">
+                        <label class="col-md-3 font-weight-bold"> Sequence </label>
+                        <div class="col-md-9">
+                            {{form.sequence}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Open Date </label>
+                    <div class="col-md-9">
+                        {{form.open_date}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Expected Salary </label>
+                    <div class="col-md-9">
+                        {{form.expected_salary}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Note </label>
+                    <div class="col-md-9">
+                        {{form.note}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Status </label>
+                    <div class="col-md-9">
+                        {{form.status}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Department </label>
+                    <div class="col-md-9">
+                        <input type='text' name='department' value='{{job.department}}' class="form-control" readonly/>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Tags </label>
+                    <div class="col-md-9">
+                        {% for tag in job.tags.all %}
+                            <a href="#" class="badge badge-pill badge-info"> {{tag}} </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Create Date </label>
+                    <div class="col-md-9">
+                        {{form.create_date}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">                    
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Attachment </label>
+                    <div class="col-md-9">
+                        {{form.attachment}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Active </label>
+                    <div class="col-md-9">
+                        {{form.is_active}}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

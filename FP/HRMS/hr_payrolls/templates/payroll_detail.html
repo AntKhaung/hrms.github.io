@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block head_block %} {% endblock %}
+{% block body_block %}
+<div class="container" style="font-family: Poppins;">
+    <div>
+        <h1 class="float-right" style="font-weight: bold;"> Payroll Details </h1>
+    
+    <form class="mt-5" method="POST" action="/hr_payrolls/new_payroll/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <a class="btn btn-dark" href="/hr_payrolls/show_payroll">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> 
+                Back
+            </a>
+            
+            <a class="btn btn-outline-dark" href="/hr_payrolls/update/{{form.instance.id}}/"> Update </a>
+            
+            <a class="btn btn-outline-dark" href="/hr_payrolls/delete/{{form.instance.id}}/"
+                onclick="return confirm('Are you sure?');"> Delete </a>
+        </div>
+        <br/>
+
+        <fieldset disabled="disabled">
+            <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                    <div class="form-row">
+                        <label class="col-md-3 font-weight-bold"> Name </label>
+                        <div class="col-md-9">
+                            {{form.name}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="list-group-item">
+                    <div class="form-row">
+                        <label class="col-md-3 font-weight-bold"> Total Ammount </label>
+                        <div class="col-md-9">
+                            {{form.ammount}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Note </label>
+                    <div class="col-md-9">
+                        {{form.note}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Status </label>
+                    <div class="col-md-9">
+                        {{form.status}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Is Paid </label>
+                    <div class="col-md-9">
+                        {{form.is_paid}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Date </label>
+                    <div class="col-md-9">
+                        {{form.date}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="list-group-item">                    
+                <div class="form-row">
+                    <label class="col-md-3 font-weight-bold"> Attachment </label>
+                    <div class="col-md-9">
+                        {{form.attachment}}
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</div>
+{% endblock %}

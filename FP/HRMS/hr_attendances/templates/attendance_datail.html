@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block head_block %} {% endblock %}
+{% block body_block %}
+<div class="container" style="font-family: Poppins;" >
+    <div>
+        <h1 class="float-right" style="font-weight: bold;"> Attendance Details </h1>
+
+        <form class="mt-5" method="POST" action="/hr_attendances/new_attendance/" enctype="multipart/form-
+        data">
+            {% csrf_token %}
+            <div class="form-group">
+                <a class="btn btn-dark" href="/hr_attendances/show_attendance">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                    Back
+                </a>
+
+                <a class="btn btn-outline-dark"  href="/hr_attendances/update/{{attendance.id}}/"> Update </a>
+
+                <a class="btn btn-outline-dark"  href="/hr_attendances/delete/{{attendance.id}}/" onclick="return confirm('Are you sure?');"> Delete </a>
+            </div>
+        </form>
+    </div>
+    <br/>
+
+    <div class="list-group list-group-flush">
+        <div class="list-group-item">
+            <div class="form-row">
+                <label class="col-md-3 font-weight-bold"> Name </label>
+                <div class="col-md-9">
+                    <input type='text' name='name' value='{{attendance.name}}' class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="form-row">
+                <label class="col-md-3 font-weight-bold"> Check In </label>
+                <div class="col-md-9">
+                    <input type='text' name='check_in' value='{{attendance.check_in}}' class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="form-row">
+                <label class="col-md-3 font-weight-bold"> Check Out </label>
+                <div class="col-md-9">
+                    <input type='text' name='check_out' value='{{attendance.check_out}}' class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="form-row">
+                <label class="col-md-3 font-weight-bold"> Date </label>
+                <div class="col-md-9">
+                    <input type='text' name='date' value='{{attendance.date}}' class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group-item">
+            <div class="form-row">
+                <label class="col-md-3 font-weight-bold"> Description </label>
+                <div class="col-md-9">
+                    <input type='text' name='date' value='{{attendance.description}}' class="form-control" readonly/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
